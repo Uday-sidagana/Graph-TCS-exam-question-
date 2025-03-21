@@ -49,7 +49,7 @@ while start_node !=t:
                 if right_edge == edge_tuple[2]:
                     output_list.append(edge_name)
                     start_node = edge_tuple[1]
-                    prev_node = right_edge
+                    prev_edge = (start_node, edge_tuple[1], right_edge)
                 
             
             # for edge_name, edge_tuple in big_dict.items():
@@ -64,7 +64,7 @@ while start_node !=t:
 
             
             right_edge_list = sorted(weight_dict.values())
-            right_edge_list.remove(prev_node)
+            right_edge_list.remove(prev_edge[2])
             right_edge = min(right_edge_list)
             
             for edge_name, edge_tuple in big_dict.items():
