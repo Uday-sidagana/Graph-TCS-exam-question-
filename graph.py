@@ -39,30 +39,40 @@ while start_node !=t:
     weight_dict={}
     
     for i in big_list:
+        
         if i[0] == start_node:
             relevant_list.append(i)
             weight_dict.update({big_list.index(i):i[2]})
-            # right_edge = min(weight_dict.values())
-
-            right_edge = sorted(weight_dict.values())
-
-            found_next = False
-            for i in right_edge:
-                for edge_name, edge_tuple in big_dict.items():
-                    if i == edge_tuple[2]:
-                        output_list.append(edge_name)
-                        start_node = edge_tuple[1]
-                        found_next=True
-                        break
-                if found_next == True:
-                    break
-                    
-                    
-             
+            right_edge = min(weight_dict.values())
+            
+            for edge_name, edge_tuple in big_dict.items():
+                if right_edge == edge_tuple[2]:
+                    output_list.append(edge_name)
+                    start_node = edge_tuple[1]
+                    prev_node = right_edge
+                
+            
             # for edge_name, edge_tuple in big_dict.items():
             #     if edge_tuple[2] in weight_dict.values():
             #         output_list.append(edge_name)
+        else:
+            right_edge_list=[]
+            start_node= visited.pop()
+
+            relevant_list.append(start_node)
+            weight_dict.update({big_list.index(i):i[2]})
+
             
+            right_edge_list = sorted(weight_dict.values())
+            right_edge_list.remove(prev_node)
+            right_edge = min(right_edge_list)
+            
+            for edge_name, edge_tuple in big_dict.items():
+                if right_edge == edge_tuple[2]:
+                    output_list.append(edge_name)
+                    start_node = edge_tuple[1]
+                        
+
 
 
 
