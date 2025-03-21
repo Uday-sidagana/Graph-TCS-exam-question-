@@ -49,7 +49,7 @@ while start_node !=t:
                 if right_edge == edge_tuple[2]:
                     output_list.append(edge_name)
                     start_node = edge_tuple[1]
-                    prev_edge = (start_node, edge_tuple[1], right_edge)
+                    prev_edge = (i[0], edge_tuple[1], right_edge)
                 
             
             # for edge_name, edge_tuple in big_dict.items():
@@ -57,14 +57,22 @@ while start_node !=t:
             #         output_list.append(edge_name)
         else:
             right_edge_list=[]
-            start_node= visited.pop()
+            if visited:
+                start_node = visited.pop()
+            else:
+                break
 
             relevant_list.append(start_node)
             weight_dict.update({big_list.index(i):i[2]})
 
             
             right_edge_list = sorted(weight_dict.values())
-            right_edge_list.remove(prev_edge[2])
+
+            try:
+                right_edge_list.remove(prev_edge[2])
+            except ValueError:
+                pass 
+            
             right_edge = min(right_edge_list)
             
             for edge_name, edge_tuple in big_dict.items():
